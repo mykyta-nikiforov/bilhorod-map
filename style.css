@@ -1,0 +1,112 @@
+body{
+  color: #404040;
+  font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
+  margin: 0;
+  padding: 0;
+}
+h1{
+  font-size: 22px;
+  margin: 0;
+  font-weight: 400;
+  line-height: 20px;
+  padding: 20px 2px;
+}
+a{
+  color: #404040;
+  text-decoration: none;
+}
+a:hover{
+  color: #101010;
+}
+.map{
+  position:absolute;
+  left: 33.3333%;
+  top: 0;
+  bottom: 0;
+  width: 66.6666%;
+}
+.sidebar {
+  position: absolute;
+  width: 33.3333%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  border-right: 1px solid #fff;
+}
+.pad2 {
+  padding: 20px;
+}
+.heading {
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  height: 60px;
+  /*line-height: 60px;*/
+  padding: 0 10px;
+}
+.listings {
+  height: 100%;
+  /*overflow: auto;*/
+  /*padding-bottom: 60px;*/
+}
+.listings .item {
+  display: block;
+  border-bottom: 1px solid #eee;
+  padding: 10px;
+  text-decoration: none;
+}
+.listings .item:last-child {
+  border-bottom: none;
+}
+.listings .item .title{
+  display: block;
+  color: black;
+  font-weight: 700;
+}
+.listings .item .title small {
+  font-weight: 400;
+}
+.listings .item.active .title,
+.listings .item .title:hover {color: #c16e6e;}
+
+.listings .item.active {
+  background-color: #f8f8f8;
+}
+.marker {
+  display: block;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.mapboxgl-popup{
+  padding-bottom: 30px;
+}
+/*.mapboxgl-popup-close-button{
+  display: none;
+}*/
+
+.mapboxgl-popup-content{
+  font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
+  padding: 0;
+  width: 180px;
+}
+.mapboxgl-popup-content-wrapper{
+  padding: 1%;
+}
+.mapboxgl-popup-content h3 {
+  background: #91B788;
+  color: #fff;
+  margin: 0;
+  display: block;
+  padding: 10px;
+  border-radius: 3px 3px 0 0;
+  font-weight: 700;
+  margin-top: -15px;
+}
+.mapboxgl-popup-content p{
+  padding: 0 10px;
+}
+.mapboxgl-popup-content div {
+  padding: 5px;
+}
