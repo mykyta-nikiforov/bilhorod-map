@@ -45,9 +45,7 @@
     }));
 
     // Here I can't get the features
-    var allFeatures = map.querySourceFeatures('composite', {
-      'sourceLayer': 'akkerman'
-    });
+    var allFeatures;
 
     <!--------3d-buildings-------->
     map.on('load', function(e) {
@@ -70,6 +68,9 @@
           },
           'fill-extrusion-opacity': .4
         }
+      });
+      allFeatures = map.querySourceFeatures('composite', {
+        'sourceLayer': 'akkerman'
       });
       console.dir(allFeatures);
       // console.dir(map.getSource('composite').vectorLayerIds)
@@ -100,6 +101,7 @@
       var features = map.queryRenderedFeatures(e.point, {
         layers: ['locations']
       });
+      console.dir(features)
 
       if (!features.length) {
         return;
