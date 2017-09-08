@@ -45,8 +45,8 @@
     }));
 
     // Here I can't get the features
-    var allFeatures = map.querySourceFeatures('morganvolter.cj77n1jkq1ale33jw0g9haxc0-2haga', {
-      'sourceLayer': 'locations'
+    var allFeatures = map.querySourceFeatures('composite', {
+      'sourceLayer': 'akkerman'
     });
 
     <!--------3d-buildings-------->
@@ -72,6 +72,7 @@
         }
       });
       console.dir(allFeatures);
+      // console.dir(map.getSource('composite').vectorLayerIds)
       // buildLocationList(allFeatures);
     });
 
