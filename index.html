@@ -6,6 +6,7 @@
   <title>The map</title>
   <meta name="viewport" content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
+  <script src="myscript.js"></script>
   <script src='https://api.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
   <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-language/v0.9.0/mapbox-gl-language.js'></script>
   <link href='https://api.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.css' rel='stylesheet' />
@@ -44,8 +45,8 @@
       trackUserLocation: true
     }));
 
-    // Here I can't get the features
     var allFeatures;
+    var listedFeatures = [];
 
     <!--------3d-buildings-------->
     map.on('load', function(e) {
@@ -73,48 +74,28 @@
         'sourceLayer': 'akkerman'
       });
       console.dir(allFeatures);
-      // console.dir(map.getSource('composite').vectorLayerIds)
-      // buildLocationList(allFeatures);
+      // console.dir(map.getSource('composite').vectorLayerIds);
+      buildLocationList(allFeatures);
     });
-
-    // List of all features, doesn't work because of lack of... allFeatures :)
-    function buildLocationList(data) {
-      for (i = 0; i < data.features.length; i++) {
-        var currentFeature = data.features[i];
-        var prop = currentFeature.properties;
-        var listings = document.getElementById('listings');
-        var listing = listings.appendChild(document.createElement('div'));
-        listing.className = 'item';
-        listing.id = 'listing-' + i;
-
-        var link = listing.appendChild(document.createElement('a'));
-        link.href = '#';
-        link.className = 'title';
-        link.dataPosition = i;
-        link.innerHTML = prop.name;
-        var details = listing.appendChild(document.createElement('div'));
-        details.innerHTML = prop.description;
-      }
-    }
 
     map.on('click', function(e) {
       var features = map.queryRenderedFeatures(e.point, {
         layers: ['locations']
       });
-      console.dir(features)
-
+      console.dir(features);
+      removeActivePopup();
+      deleteActiveItem();
       if (!features.length) {
+        console.dir("wanna return");
         return;
       }
+      console.dir("after return");
       var feature = features[0];
       flyToPoint(feature);
-      var popup = new mapboxgl.Popup({
-          offset: [0, -15]
-        })
-        .setLngLat(feature.geometry.coordinates)
-        .setHTML('<h3>' + feature.properties.name + '</h3>' + '<p>' +
-          feature.properties.description + '</p>')
-        .addTo(map);
+      createPopUp(feature);
+      var listing = document.getElementById('listing-' + listedFeatures.indexOf(feature.properties.name));
+      console.log(listedFeatures.indexOf(feature.properties.name));
+      listing.classList.add('active');
     });
 
     map.on('mousemove', function(e) {
@@ -123,15 +104,6 @@
       });
       map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
     })
-
-
-    function flyToPoint(currentFeature) {
-      map.flyTo({
-        center: currentFeature.geometry.coordinates,
-        zoom: 16.5,
-        pitch: 80
-      });
-    }
   </script>
 </body>
 
